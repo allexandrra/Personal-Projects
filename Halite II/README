@@ -1,0 +1,53 @@
+PA - Veni vidi Segfault - Etapa 1
+
+1.Instructiuni de compilare:
+
+make
+
+sau
+
+javac hlt/*.java
+javac MyBot.java
+
+2.Detalii despre structura proiectului
+    Am continuat sa lucram la codul rezultat in etapa 1, intalninud-ne
+    si discutand diferite strategii.
+
+3.Detalii despre abordarea algoritica a etapei: ce algoritmi
+ati folosit, cum i-ati combinat, de ce, compelxitati, etc:
+	Am decis sa implementam o abordare mai agresiva, prin care,
+	in loc sa colonizam la inceput planete, atacam rapid navele
+	inamice in curs de colonizare, in speranta ca le vom prinde descoperite,
+	acestea nepuntandu-se apara daca sunt in proces de dock/undock.
+	Aceasta abordare se bazeaza pe observatiile facute asupra botului dat,
+	care mereu incepe prin a coloniza planete apropiate. In functie
+	de asezarea planetelor pe harta, acesta este uneori anihilat de noi in early game.
+
+	Am adaugat clasa attack move care defineste tipul de actiune care se 
+	face asupra navelor inamice si o functie in clasa Ship care se numeste
+	canAttack, aseanatoare cu canDock care este doar pentru nave inamice (daca putem sa
+	atacam nave inamice sau nu).
+
+4.Surse de inspiratie:
+	Forumul Halite;
+	Replay-urile din urma meciurilor.
+
+5.Responsabilitatea fiecarui membru al echipei:
+	Manole Aida-Stefania:
+		A implementat strategia agresiva
+	Gazdaru Alina-Alexandra:
+		A implementat strategia agresiva
+	Visan Tudor-Cosmin:
+		A venit cu idei de strategii, si a incercat
+		sa implementeze un nou algoritm de pathfinding
+	Trifu Andrei-Stefan:
+		A venit cu idei de strategii, si a incercat sa implementeze un nou
+		algoritm de pathfinding.
+
+Idei incercate pana acum, care pot fi folosite in cadrul urmatoarelor etape:
+
+	Algoritm nou de pathfinding;
+	Strategii de tip semi-rush (2 nave ataca una colonizeaza) fix sau flexibil
+	(intial 2-1, apoi numerele se schimba in functie de starea jocului);
+	Alegere dinamica a strategiei (defensiva, ofensiva, colonization focus,
+	early-game rush, combinatii intre)
