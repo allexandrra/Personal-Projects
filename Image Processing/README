@@ -1,0 +1,31 @@
+Aceasta tema presupune mai multe procese de prelucrare de imagini.
+
+Primul task este cel de realizare a umei imagini alb-negru pornind de la o 
+imagine data. Se va citi din fisierul input.txt numele imaginii ce va fi 
+prelucrata, numarul threshold, si numele fisierului .bin ce contine marginile 
+imaginii ce va fi decomprimata. Pentru a obtine numele imaginii cerute la task 
+1 am folosit mai multe functii specifice sirurilor de caractere. Pentru acest 
+task am alocat dinamic 2 matrici, una in care am memorat matricea de pixeli a 
+imaginii, si una in care am memorat pixelii obtinuti in urma aplicarii formulei 
+de obtinere a imaginilor alb-negru (aplicata pentru fiecare canal de culoare).
+
+Pentru task 2 am declarat 3 matrice, F1, F2, F3, unde am memorat valorile 
+filtrelor date in problema. Am declarat o matrice filtru unde am memorat 
+matricea nmatrix(matricea alb-negru) rasturnata, si o matrice aux, de dimensiuni 
+height+2 si width+2, initializata cu 0, in care am mutat toti pixelii din filtru 
+in partea centrala. In variabila x am memorat rezultatul obtinut in urma aplicarii 
+formulei de filtru, si in cazul in care valoarea acestuia respecta criteriile, 
+ii atribui valoarea pe pozitia corespunzatoare din matricea help1, din care se 
+citeste noua imagine. Asemanator se procedeaza si cu celelalte 2 filtre.
+
+La ultimul task, cel de decomprimare a unei imagini, am folosit o matrice numita 
+matrice in care am memorat valorile pixelilor in fisieul .bin. Am mai folosit o 
+matrice v, initializata cu 0, cu elemente de tip short, in care am memorat pozitia 
+pe care se afla un pixel margine. Pentru completarea pixelilor lipsa am folosit 
+urmatoarea metoda: in matricea v nu se gasesc elemente decat din intervalul 
+[0;width], iar elementele de 0 corespunzatoare matricii de pixeli se gasesc numai 
+pe prima linie, care in matricea matrice reprezinta o margine. Astfel acolo unde 
+am gasit o valoare diferita in v fata de valoarea pozitiei pe coloana in matrice, 
+vom completa cu valoarea unui vecin(de pe acea pozitie lipsind pixelul initial).
+In continuare se inverseaza canalele R si G, si se rastoarna matricea, obtinandu-se imaginea decomprimata.
+
