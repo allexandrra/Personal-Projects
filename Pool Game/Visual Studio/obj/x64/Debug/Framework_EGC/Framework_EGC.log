@@ -1,0 +1,10 @@
+﻿  Tema2.cpp
+c:\users\alina\desktop\school\an 3\semestru 1\egc\teme\tema 2\framework-egc-master\source\laboratoare\tema2\tema2.cpp(237): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\alina\desktop\school\an 3\semestru 1\egc\teme\tema 2\framework-egc-master\source\laboratoare\tema2\tema2.cpp(272): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\alina\desktop\school\an 3\semestru 1\egc\teme\tema 2\framework-egc-master\source\laboratoare\tema2\tema2.cpp(273): warning C4305: 'argument': truncation from 'double' to 'float'
+  Framework_EGC.vcxproj -> C:\Users\alina\Desktop\School\An 3\Semestru 1\EGC\Teme\Tema 2\Framework-EGC-master\Visual Studio\..\x64\Debug\Framework_EGC.exe
+  A subdirectory or file C:\Users\alina\Desktop\School\An 3\Semestru 1\EGC\Teme\Tema 2\Framework-EGC-master\Visual Studio\scripts\..\..\x64\Debug already exists.
+  0 File(s) copied
+  0 File(s) copied
+  0 File(s) copied
+  0 File(s) copied
