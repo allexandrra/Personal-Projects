@@ -47,8 +47,6 @@ public class CameraActivity extends AppCompatActivity {
         setContentView(R.layout.activity_camera);
         ButterKnife.bind(this);
 
-        new Thread(new ClientThread()).start();
-
         globals = GlobalVariables.getInstance();
         if(globals.getCameraSet() == false) {
             setGlobalParams(ip, port);
@@ -71,17 +69,6 @@ public class CameraActivity extends AppCompatActivity {
                     isOn = false;
                     capture.setText("Stop");
                     switchCamera.setVisibility(View.GONE);
-
-                    PrintWriter out = null;
-                    try {
-                        out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
-                        out.println("hello");
-                        out.flush();
-                    } catch (UnknownHostException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
                 } else {
                     resetVideo();
                 }
@@ -130,19 +117,5 @@ public class CameraActivity extends AppCompatActivity {
         globals.setCameraSet();
         globals.setIp(ip);
         globals.setPort(port);
-    }
-
-    class ClientThread implements Runnable {
-        @Override
-        public void run() {
-            try {
-                InetAddress srvAddr = InetAddress.getByName(ip);
-                socket = new Socket(srvAddr, port);
-            } catch (UnknownHostException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
 }

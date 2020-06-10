@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">LiveToGo</string>
     <string name="livetogo">LiveToGo</string>
+
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
 </resources>
