@@ -18,6 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".CameraActivity"></activity>
+        <activity android:name=".TestStream"/>
         <activity android:name=".CreateEvent" />
         <activity android:name=".MainMenu" />
         <activity android:name=".SignupPage" />

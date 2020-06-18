@@ -42,7 +42,7 @@ public class TestStream extends Activity implements
         SurfaceHolder.Callback,
         OnCheckedChangeListener {
 
-    public final static String TAG = "MainActivity";
+    public final static String TAG = "TestStream";
 
     private Button mButtonSave;
     private Button mButtonVideo;
