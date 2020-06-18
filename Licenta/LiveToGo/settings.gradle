@@ -1,3 +1,0 @@
-rootProject.name='LiveToGo'
-include ':app'
-include ':libstreaming'
