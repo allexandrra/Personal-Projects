@@ -3,18 +3,21 @@ package com.example.livetogo;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.majorkernelpanic.streaming.MediaStream;
 import net.majorkernelpanic.streaming.Session;
 import net.majorkernelpanic.streaming.SessionBuilder;
 import net.majorkernelpanic.streaming.audio.AudioQuality;
 import net.majorkernelpanic.streaming.gl.SurfaceView;
 import net.majorkernelpanic.streaming.rtsp.RtspClient;
 import net.majorkernelpanic.streaming.video.VideoQuality;
+
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.hardware.Camera.CameraInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -35,14 +38,13 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class TestStream extends Activity implements
-        OnClickListener,
-        RtspClient.Callback,
-        Session.Callback,
-        SurfaceHolder.Callback,
-        OnCheckedChangeListener {
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+public class TestStream extends Activity implements OnClickListener, RtspClient.Callback, Session.Callback, SurfaceHolder.Callback, OnCheckedChangeListener {
 
     public final static String TAG = "TestStream";
+    private static final int requestCode = 100;
 
     private Button mButtonSave;
     private Button mButtonVideo;
@@ -66,6 +68,7 @@ public class TestStream extends Activity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_test_stream);
 
@@ -84,6 +87,11 @@ public class TestStream extends Activity implements
         mLayoutServerSettings = (FrameLayout) findViewById(R.id.server_layout);
         mRadioGroup =  (RadioGroup) findViewById(R.id.radio);
         mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
+
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, requestCode);
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED)
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, requestCode);
 
         mRadioGroup.setOnCheckedChangeListener(this);
         mRadioGroup.setOnClickListener(this);
@@ -117,16 +125,6 @@ public class TestStream extends Activity implements
         mClient = new RtspClient();
         mClient.setSession(mSession);
         mClient.setCallback(this);
-
-        // Use this to force streaming with the MediaRecorder API
-        //mSession.getVideoTrack().setStreamingMethod(MediaStream.MODE_MEDIARECORDER_API);
-
-        // Use this to stream over TCP, EXPERIMENTAL!
-        //mClient.setTransportMode(RtspClient.TRANSPORT_TCP);
-
-        // Use this if you want the aspect ratio of the surface view to
-        // respect the aspect ratio of the camera preview
-        //mSurfaceView.setAspectRatioMode(SurfaceView.ASPECT_RATIO_PREVIEW);
 
         mSurfaceView.getHolder().addCallback(this);
 
@@ -201,10 +199,10 @@ public class TestStream extends Activity implements
         matcher.find();
         int width = Integer.parseInt(matcher.group(1));
         int height = Integer.parseInt(matcher.group(2));
-        int framerate = Integer.parseInt(matcher.group(3));
+        int frameRate = Integer.parseInt(matcher.group(3));
         int bitrate = Integer.parseInt(matcher.group(4))*1000;
 
-        mSession.setVideoQuality(new VideoQuality(width, height, framerate, bitrate));
+        mSession.setVideoQuality(new VideoQuality(width, height, frameRate, bitrate));
         Toast.makeText(this, ((RadioButton)findViewById(id)).getText(), Toast.LENGTH_SHORT).show();
 
         Log.d(TAG, "Selected resolution: "+width+"x"+height);
