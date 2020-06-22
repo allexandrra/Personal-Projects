@@ -18,6 +18,7 @@ import android.widget.Toast;
 public class SignupPage extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
 
+    @BindView(R.id.username) EditText usernameText;
     @BindView(R.id.email) EditText emailText;
     @BindView(R.id.password) EditText passwordText;
     @BindView(R.id.re_password) EditText rePasswordText;
@@ -53,6 +54,7 @@ public class SignupPage extends AppCompatActivity {
         progressDialog.setMessage("Creating account...");
         progressDialog.show();
 
+        String username = usernameText.getText().toString();
         String email = emailText.getText().toString();
         String password = passwordText.getText().toString();
         String rePassword = rePasswordText.getText().toString();
@@ -85,9 +87,17 @@ public class SignupPage extends AppCompatActivity {
     public boolean validate() {
         boolean valid = true;
 
+        String username = usernameText.getText().toString();
         String email = emailText.getText().toString();
         String password = passwordText.getText().toString();
         String rePassword = rePasswordText.getText().toString();
+
+        if (username.isEmpty()) {
+            usernameText.setError("This field shoud not be empty.");
+            valid = false;
+        } else {
+            usernameText.setError(null);
+        }
 
         if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             emailText.setError("Please enter a valid email adress.");

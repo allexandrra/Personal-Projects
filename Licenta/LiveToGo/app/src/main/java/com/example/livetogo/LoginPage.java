@@ -18,7 +18,7 @@ import butterknife.ButterKnife;
 public class LoginPage extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
 
-    @BindView(R.id.email) EditText emailText;
+    @BindView(R.id.username) EditText usernameText;
     @BindView(R.id.password) EditText passwordText;
     @BindView(R.id.loginButton) Button loginButton;
     @BindView(R.id.signupButton) Button signupButton;
@@ -63,7 +63,7 @@ public class LoginPage extends AppCompatActivity {
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
 
-        String email = emailText.getText().toString();
+        String username = usernameText.getText().toString();
         String password = passwordText.getText().toString();
 
         // Login logic here
@@ -98,18 +98,18 @@ public class LoginPage extends AppCompatActivity {
     public boolean validate() {
         boolean valid = true;
 
-        String email = emailText.getText().toString();
+        String username = usernameText.getText().toString();
         String password = passwordText.getText().toString();
 
-        if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            emailText.setError("Please enter a valid email adress.");
+        if (username.isEmpty()) {
+            usernameText.setError("This field should not be empty.");
             valid = false;
         } else {
-            emailText.setError(null);
+            usernameText.setError(null);
         }
 
         if (password.isEmpty() || password.length() < 8) {
-            passwordText.setError("Password must be at least 8 characters long");
+            passwordText.setError("Password must be at least 8 characters long.");
             valid = false;
         } else {
             passwordText.setError(null);

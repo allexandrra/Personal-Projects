@@ -26,19 +26,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:src="@drawable/ic_camera_action_lights_element_by_vexels"
+        app:srcCompat="@drawable/ic_camera_action_lights_element_by_vexels"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="TODO" />
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/username"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:inputType="textEmailAddress"
         android:background="@drawable/edittext_bg"
-        android:hint="Email address"
+        android:hint="Username"
         android:textColorHint="@color/login_form_details"
         android:padding="16dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
@@ -58,7 +58,7 @@
         android:drawableRight="@drawable/ic_eye"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
+        app:layout_constraintTop_toBottomOf="@+id/username" />
 
     <Button
         android:id="@+id/loginButton"

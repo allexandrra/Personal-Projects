@@ -66,7 +66,7 @@
                 style="@style/RadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="640x480, 30 fps, 600 Kbps" />
+                android:text="720x480, 60 fps, 600 Kbps" />
         </RadioGroup>
     </LinearLayout>
 

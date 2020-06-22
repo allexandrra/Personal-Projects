@@ -219,7 +219,6 @@ public class TestStream extends Activity implements OnClickListener, RtspClient.
         if (!mClient.isStreaming()) {
             String ip,port,path;
 
-            // We save the content user inputs in Shared Preferences
             SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(TestStream.this);
             Editor editor = mPrefs.edit();
             editor.putString("uri", mEditTextURI.getText().toString());
@@ -227,7 +226,6 @@ public class TestStream extends Activity implements OnClickListener, RtspClient.
             editor.putString("username", mEditTextUsername.getText().toString());
             editor.commit();
 
-            // We parse the URI written in the Editext
             Pattern uri = Pattern.compile("rtsp://(.+):(\\d*)/(.+)");
             Matcher m = uri.matcher(mEditTextURI.getText()); m.find();
             ip = m.group(1);
@@ -240,7 +238,6 @@ public class TestStream extends Activity implements OnClickListener, RtspClient.
             mClient.startStream();
 
         } else {
-            // Stops the stream and disconnects from the RTSP server
             mClient.stopStream();
         }
     }
