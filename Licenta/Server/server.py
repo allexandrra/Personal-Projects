@@ -1,27 +1,54 @@
 import socket
-import cv2
-import numpy as np
+from _thread import *
+import keyboard
+import re
 
 HOST = '192.168.1.4'
-PORT = 5000
+PORT = 8000
+maxCon = 999
+eventList = {}
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-print('socket created')
-
 s.bind((HOST, PORT))
-print('socket bind completed')
+s.listen(maxCon)
 
-# a Q of 5
-s.listen(5)
-print('socket now listening')
+def on_new_client(client) :
+    while True:
+        clientType = client.recv(1024).decode()
+        if clientType == "source":
+            link = client.recv(1024).decode()
+            p = re.compile('\/([a-z]+)\/')
+            eventName = p.findall(link)[0]
+            if not eventName:
+                break
+            else:
+                if eventName in eventList.keys():
+                    eventList[eventName].append(link)
+                else:
+                    eventList[eventName] = []
+                    eventList[eventName].append(link)
+            print(str(eventList))
+            break
+        if clientType == "destination":
+            eventName = client.recv(1024).decode()
+            while True:
+                source = client.recv(1024).decode()
+                if source == '1':
+                    client.sendall(eventList[eventName][0].encode('utf-8'))
+                if source == '2':
+                    client.sendall(eventList[eventName][1].encode('utf-8'))
+                if source == '3':
+                    client.sendall(eventList[eventName][2].encode('utf-8'))
+                if source == 'q':
+                    bye = "quit"
+                    client.sendall(bye.encode('utf-8'))
+                    break
+            break
+
+    client.close()
 
 while True:
-    try:
-        conn, addr = s.accept()
-        print(f'client connected with {addr}')
+    (client, addr) = s.accept()
+    start_new_thread(on_new_client, (client, ))
 
-        dim = conn.recv(1024)
-        print(dim)
-
-    except KeyboardInterrupt:
-        s.close()
+s.close()

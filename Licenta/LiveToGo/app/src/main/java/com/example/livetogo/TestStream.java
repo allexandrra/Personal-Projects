@@ -1,5 +1,9 @@
 package com.example.livetogo;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,6 +23,7 @@ import android.content.SharedPreferences.Editor;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.hardware.Camera.CameraInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -64,11 +69,12 @@ public class TestStream extends Activity implements OnClickListener, RtspClient.
     private Session mSession;
     private RtspClient mClient;
 
+    public String eventName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_test_stream);
 
@@ -232,6 +238,10 @@ public class TestStream extends Activity implements OnClickListener, RtspClient.
             port = m.group(2);
             path = m.group(3);
 
+            eventName = "rtmp://" + ip + ":" + port + "/" + path;
+            send sendName = new send();
+            sendName.execute();
+
             mClient.setCredentials(mEditTextUsername.getText().toString(), mEditTextPassword.getText().toString());
             mClient.setServerAddress(ip, Integer.parseInt(port));
             mClient.setStreamPath("/"+path);
@@ -347,6 +357,32 @@ public class TestStream extends Activity implements OnClickListener, RtspClient.
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
         mClient.stopStream();
+    }
+
+    class send extends AsyncTask<Void, Void, Void> {
+        Socket s;
+        PrintWriter pw;
+
+        @Override
+        protected Void doInBackground(Void...params) {
+            try {
+                s = new Socket("192.168.1.4", 8000);
+                pw = new PrintWriter(s.getOutputStream());
+                pw.write("source");
+                pw.flush();
+
+                pw.write(eventName);
+                pw.flush();
+                pw.close();
+                s.close();
+            } catch (UnknownHostException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
     }
 }
 

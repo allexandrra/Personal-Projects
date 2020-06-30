@@ -83,7 +83,7 @@ public class MainMenu extends AppCompatActivity {
             listEventsButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getApplicationContext(), PlayVideo.class);
+                    Intent intent = new Intent(getApplicationContext(), CreateEvent.class);
                     startActivity(intent);
                     finish();
                     overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);

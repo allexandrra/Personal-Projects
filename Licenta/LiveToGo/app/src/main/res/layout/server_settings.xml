@@ -37,7 +37,8 @@
                     android:layout_margin="0dp"
                     android:inputType="textUri"
                     android:singleLine="true"
-                    android:text="@string/default_stream" >
+                    android:text="@string/default_stream"
+                    android:textColor="@color/cardview_light_background">
                 </EditText>
             </TableRow>
 
@@ -60,7 +61,8 @@
                     android:layout_column="2"
                     android:inputType="text"
                     android:singleLine="true"
-                    android:text="@string/username_hint" />
+                    android:text="@string/username_hint"
+                    android:textColor="@color/cardview_light_background"/>
             </TableRow>
 
             <TableRow>
@@ -83,7 +85,9 @@
                     android:layout_column="2"
                     android:inputType="textVisiblePassword"
                     android:singleLine="true"
-                    android:hint="@string/password_hint" />
+                    android:hint="@string/password_hint"
+                    android:textColorHint="@color/cardview_light_background"
+                    android:textColor="@color/cardview_light_background"/>
             </TableRow>
         </TableLayout>
 
