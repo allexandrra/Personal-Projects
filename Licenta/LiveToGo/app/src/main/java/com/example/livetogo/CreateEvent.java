@@ -57,7 +57,7 @@ public class CreateEvent extends AppCompatActivity {
         PlayerView playerView = findViewById(R.id.simple_player);
         playerView.setPlayer(player);
 
-        buildMediaSource("rtmp://192.168.1.4:1935/live/myStream");
+        buildMediaSource("rtmp://192.168.1.4:1935/live/source1");
 
         sursa1Button = (Button) findViewById(R.id.sursa1);
         sursa2Button = (Button) findViewById(R.id.sursa2);
@@ -66,7 +66,7 @@ public class CreateEvent extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 long time = player.getCurrentPosition();
-                buildMediaSource("rtmp://192.168.1.4:1935/live/myStream");//method already defines above
+                buildMediaSource("rtmp://192.168.1.4:1935/live/source1");//method already defines above
                 player.seekTo(0, time);
             }
         });
@@ -75,7 +75,7 @@ public class CreateEvent extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 long time = player.getCurrentPosition();
-                buildMediaSource("rtmp://192.168.1.4:1935/live/test");//method already defines above
+                buildMediaSource("rtmp://192.168.1.4:1935/live/source2");//method already defines above
                 player.seekTo(0, time);
             }
         });

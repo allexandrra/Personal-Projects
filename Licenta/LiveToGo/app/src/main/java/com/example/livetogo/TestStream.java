@@ -112,7 +112,7 @@ public class TestStream extends Activity implements OnClickListener, RtspClient.
 
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(TestStream.this);
         if (mPrefs.getString("uri", null) != null) mLayoutServerSettings.setVisibility(View.GONE);
-        mEditTextURI.setText(mPrefs.getString("uri", getString(R.string.default_stream)));
+        mEditTextURI.setText(mPrefs.getString("uri", ""));
         mEditTextPassword.setText(mPrefs.getString("password", ""));
         mEditTextUsername.setText(mPrefs.getString("username", ""));
 

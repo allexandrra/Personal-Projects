@@ -37,7 +37,6 @@
                     android:layout_margin="0dp"
                     android:inputType="textUri"
                     android:singleLine="true"
-                    android:text="@string/default_stream"
                     android:textColor="@color/cardview_light_background">
                 </EditText>
             </TableRow>
